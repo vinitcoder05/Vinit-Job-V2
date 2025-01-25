@@ -1,12 +1,18 @@
 from sqlalchemy import create_engine, text
 import os
 
+# Your database connection string
 db_connection_string = os.environ['DB_CONNECTION_STRING']
 
-engine = create_engine(db_connection_string,
-                       connect_args={"ssl": {
-                           "ssl_ca": "/etc/ssl/cert.pem"
-                       }})
+# Correct usage of SSL in connect_args
+engine = create_engine(
+    db_connection_string,
+    connect_args={
+        "ssl": {
+            "ssl_cert":
+            "/etc/ssl/cert.pem",  # Path to your SSL certificate file
+        }
+    })
 
 
 def load_jobs_from_db():
