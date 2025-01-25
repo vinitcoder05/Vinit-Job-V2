@@ -1,11 +1,15 @@
 from sqlalchemy import create_engine, text
 import os
 
-# Directly assign the connection string
-db_connection_string = "mysql+pymysql://sql12759491:Cg2rY4GQam@sql12.freesqldatabase.com:3306/sql12759491?auth_plugin=mysql_native_password"
+# Correct database connection string without auth_plugin in the URL
+db_connection_string = "mysql+pymysql://sql12759491:Cg2rY4GQam@sql12.freesqldatabase.com:3306/sql12759491"
 
-# Create the SQLAlchemy engine with the correct connection string
-engine = create_engine(db_connection_string)
+# Create the SQLAlchemy engine with the correct connection string and connect_args for auth_plugin
+engine = create_engine(
+    db_connection_string,
+    connect_args={
+        "auth_plugin": "mysql_native_password",  # Specify auth_plugin here
+    })
 
 
 # Function to load all jobs from the database
